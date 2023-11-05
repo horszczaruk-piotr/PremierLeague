@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,5 +37,20 @@ public class FootballerService {
   }
   public void editFootballer(Footballer footballer) {
       return;
+  }
+
+  public List<Footballer> deleteFootballerDuplicates() {
+      var footballerList = footballerRepository.findAll();
+      List<Footballer> footballerDuplicates = new ArrayList<>();
+      var uniqueSetFootballer = new HashSet<>();
+      footballerList.forEach(
+              footballer -> {
+                  if (!uniqueSetFootballer.add(footballer)) {
+                      footballerDuplicates.add(footballer);
+                  }
+              }
+      );
+      footballerRepository.deleteAll(footballerDuplicates);
+      return footballerDuplicates;
   }
 }

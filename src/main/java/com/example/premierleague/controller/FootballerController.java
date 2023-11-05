@@ -48,6 +48,9 @@ public class FootballerController {
             log.error(exception.getMessage()+" - Error deleting footballer with id "+id);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error deleting footballer with id "+id);
         }
-
+    }
+    @PostMapping("delete-duplicates")
+    public ResponseEntity<List<Footballer>> deleteFootballerDuplicates(){
+        return ResponseEntity.status(HttpStatus.OK).body(footballerService.deleteFootballerDuplicates()) ;
     }
 }
