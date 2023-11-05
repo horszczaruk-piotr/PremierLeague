@@ -7,20 +7,34 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class FootballerService {
     private final FootballerRepository footballerRepository;
 
-  public List<Footballer> getFootballers(){
+  public List<Footballer> getFootballers() {
         return footballerRepository.findAll();
-    }
+  }
 
-    public List<Footballer> getRobertLewandowski() {
-        List<Footballer> footballerList = new ArrayList<>();
-        Footballer footballer = new Footballer("Robert", "Lewandowski", 34, "Poland", "Forward", 9, "FC Barcelona");
-        footballerList.add(footballer);
-        return footballerList;
-    }
+  public Optional<Footballer> getFootballerById(long id) {
+      return footballerRepository.findById(id);
+  }
+
+  public Footballer createFootballer(Footballer footballer) {
+      return footballerRepository.save(footballer);
+  }
+
+  public List<Footballer> createFootballers(List<Footballer> footballerList) {
+        return footballerRepository.saveAll(footballerList);
+  }
+
+  public void deleteFootballer(long id) {
+        footballerRepository.deleteById(id);
+
+  }
+  public void editFootballer(Footballer footballer) {
+      return;
+  }
 }
