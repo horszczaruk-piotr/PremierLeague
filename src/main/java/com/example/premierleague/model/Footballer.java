@@ -1,15 +1,14 @@
 package com.example.premierleague.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Footballer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +23,8 @@ public class Footballer {
 
     @Override
     public boolean equals(Object o) {
+        if (this.hashCode() == o.hashCode()) return true;
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Footballer that = (Footballer) o;
