@@ -1,7 +1,9 @@
 package com.example.premierleague.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
@@ -19,7 +21,9 @@ public class Footballer {
     String country;
     String position;
     int number;
-    String team;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    Team team;
 
     @Override
     public boolean equals(Object o) {

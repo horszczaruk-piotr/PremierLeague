@@ -32,9 +32,6 @@ public class FootballerService {
         footballerRepository.deleteById(id);
 
   }
-  public void editFootballer(Footballer footballer) {
-      return;
-  }
 
   public List<Footballer> deleteFootballerDuplicates() {
       var footballerList = footballerRepository.findAll();
@@ -99,11 +96,12 @@ public class FootballerService {
               footballer.setNumber(newNumber);
               footballerRepository.save(footballer);
           }
-          if (updates.containsKey("team")) {
+          /*if (updates.containsKey("team")) {
               String newTeam = updates.get("team").toString();
               footballer.setTeam(newTeam);
               footballerRepository.save(footballer);
-          } else {
+          }*/
+          else {
               throw new IllegalArgumentException("There is no such an ID.");
           }
       }
