@@ -5,10 +5,7 @@ import com.example.premierleague.repository.FootballerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -53,4 +50,63 @@ public class FootballerService {
       footballerRepository.deleteAll(footballerDuplicates);
       return footballerDuplicates;
   }
+
+  public Long fullUpdateFootballer(Long id, Footballer footballer){
+      Optional<Footballer> existing = footballerRepository.findById(id);
+
+      if (existing==null){
+          createFootballer(footballer);
+      } else {
+          footballer.setId(existing.get().getId());
+          footballerRepository.save(footballer);
+      }
+      return existing.get().getId();
+  }
+
+  public void partialUpdateFootballer(Long id, Map<String, Object> updates){
+      var existing = this.footballerRepository.findById(id);
+
+      if (existing.isPresent()) {
+          var footballer =  existing.get();
+
+          if (updates.containsKey("name")) {
+              String newName = updates.get("name").toString();
+              footballer.setName(newName);
+              footballerRepository.save(footballer);
+          }
+          if (updates.containsKey("surname")) {
+              String newSurname = updates.get("surname").toString();
+              footballer.setSurname(newSurname);
+              footballerRepository.save(footballer);
+          }
+          if (updates.containsKey("age")) {
+              int newAge = Integer.parseInt(updates.get("age").toString());
+              footballer.setAge(newAge);
+              footballerRepository.save(footballer);
+          }
+          if (updates.containsKey("country")) {
+              String newCountry = updates.get("country").toString();
+              footballer.setCountry(newCountry);
+              footballerRepository.save(footballer);
+          }
+          if (updates.containsKey("position")) {
+              String newPosition = updates.get("position").toString();
+              footballer.setPosition(newPosition);
+              footballerRepository.save(footballer);
+          }
+          if (updates.containsKey("number")) {
+              int newNumber = Integer.parseInt(updates.get("number").toString());
+              footballer.setNumber(newNumber);
+              footballerRepository.save(footballer);
+          }
+          if (updates.containsKey("team")) {
+              String newTeam = updates.get("team").toString();
+              footballer.setTeam(newTeam);
+              footballerRepository.save(footballer);
+          } else {
+              throw new IllegalArgumentException("There is no such an ID.");
+          }
+      }
+  }
+
 }

@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -53,4 +55,21 @@ public class FootballerController {
     public ResponseEntity<List<Footballer>> deleteFootballerDuplicates(){
         return ResponseEntity.status(HttpStatus.OK).body(footballerService.deleteFootballerDuplicates()) ;
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Void> updateFootballer(@PathVariable Long id, @RequestBody Footballer footballer) {
+        Long updatedFootballerId = this.footballerService.fullUpdateFootballer(id, footballer);
+
+        if (updatedFootballerId==id){
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.created(URI.create("id/"+updatedFootballerId)).build();
+        }
+    }
+
+    @PatchMapping("{id}")
+    public void patchFootballer(@RequestBody Map<String, Object> updates, @PathVariable Long id) {
+        this.footballerService.partialUpdateFootballer(id,updates);
+    }
+
 }
