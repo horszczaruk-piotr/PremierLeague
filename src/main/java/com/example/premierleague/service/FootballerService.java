@@ -107,4 +107,7 @@ public class FootballerService {
       }
   }
 
+public void transferFootballer (Long footballerId, Long teamId){
+
+}
 }
