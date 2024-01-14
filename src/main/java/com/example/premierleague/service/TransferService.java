@@ -24,4 +24,8 @@ public class TransferService {
 
         return transferRepository.save(transfer);
     }
+
+    public void deleteTransfer(Transfer transfer){
+        transferRepository.delete(transfer);
+    }
 }

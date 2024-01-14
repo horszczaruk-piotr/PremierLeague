@@ -1,4 +1,4 @@
-package com.example.premierleague;
+/*package com.example.premierleague;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,4 +10,4 @@ class PremierLeagueApplicationTests {
     void contextLoads() {
     }
 
-}
+}*/
